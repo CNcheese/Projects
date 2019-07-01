@@ -17,7 +17,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="频道">
-          <el-select v-model="filter.channel_id" placeholder="请选择活动区域">
+          <!-- <el-select v-model="filter.channel_id" placeholder="请选择活动区域">
             <el-option label="全部" value=""></el-option>
             <el-option
             v-for="item in channels"
@@ -25,7 +25,8 @@
             :label="item.name"
             :value="item.id"
              ></el-option>
-          </el-select>
+          </el-select> -->
+          <article-channel v-model="filter.channel_id"></article-channel>
         </el-form-item>
         <el-form-item label="时间">
           <el-date-picker
@@ -77,7 +78,12 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-             <el-button type="success" plain>修改</el-button>
+             <el-button type="success" plain @click="$router.push({
+               name: 'publish-edit',
+               params: {
+                 id: scope.row.id
+               }
+             })">修改</el-button>
             <el-button type="danger" plain @click="handleDelete(scope.row)">删除
             </el-button>
           </template>
@@ -99,9 +105,13 @@
 </template>
 
 <script>
+import ArticleChannel from '@/components/article-channel'
 
 export default {
   name: 'ArticleList',
+  components: {
+    ArticleChannel
+  },
   data () {
     return {
       articles: [],
@@ -135,7 +145,7 @@ export default {
           label: '已删除'
         }
       ],
-      channels: [], // 频道列表
+      // channels: [], // 频道列表
       filter: { // 文章查询条件参数
         status: '', // 文章状态
         channel_id: '', // 频道id
@@ -150,7 +160,7 @@ export default {
     this.loadArticles()
 
     // 加载频道列表
-    this.loadChannels()
+    // this.loadChannels()
   },
 
   methods: {
@@ -179,14 +189,14 @@ export default {
         this.artloading = false
       })
     },
-    loadChannels () {
-      this.$http({
-        method: 'GET',
-        url: '/channels'
-      }).then(data => {
-        this.channels = data.channels
-      })
-    },
+    // loadChannels () {
+    //   this.$http({
+    //     method: 'GET',
+    //     url: '/channels'
+    //   }).then(data => {
+    //     this.channels = data.channels
+    //   })
+    // },
     onSubmit () {
       // console.log('submit!')
       this.page = 1

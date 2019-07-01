@@ -48,7 +48,7 @@ export default {
     return {
       form: {
         mobile: '18822309291',
-        code: '',
+        code: '246810',
         age: ''
       },
       loginLoading: false,
@@ -93,7 +93,7 @@ export default {
       }).then(data => {
         window.localStorage.setItem('user_info', JSON.stringify(data))
         this.$message({
-          message: '登录成功',
+          message: '客官里面请',
           type: 'success'
         })
         this.loginLoading = false
