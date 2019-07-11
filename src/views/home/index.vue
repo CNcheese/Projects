@@ -27,6 +27,16 @@
         <div class="text">累计评论数</div>
       </el-col>
     </el-row>
+    <template>
+      <h2 @click="start">精彩推荐</h2>
+  <el-carousel :interval="4000" type="card" height="650px">
+    <el-carousel-item v-for="item in imagesbox" :key="item.id">
+      <!-- <h3 class="medium">{{ item }}</h3> -->
+      <img :src="item.idView" class="image">
+    </el-carousel-item>
+  </el-carousel>
+</template>
+
   </section>
 </template>
 
@@ -34,7 +44,32 @@
 export default {
   name: 'AppHome',
   data () {
-    return {}
+    return {
+      imagesbox: [{
+        id: 0, idView: require('./image/001.jpg')
+      },
+      {
+        id: 1, idView: require('./image/002.jpg')
+      },
+      {
+        id: 2, idView: require('./image/003.jpg')
+      },
+      {
+        id: 3, idView: require('./image/004.jpg')
+      },
+      {
+        id: 4, idView: require('./image/005.jpg')
+      },
+      {
+        id: 5, idView: require('./image/006.jpg')
+      }
+      ]
+    }
+  },
+  methods: {
+    start () {
+       this.$router.push({ name: 'article-list' })
+    }
   }
 }
 </script>
@@ -79,5 +114,33 @@ export default {
       border-right: 1px solid #eeeeee;
       margin-top: 13px;
     }
+  }
+
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 500px;
+    margin: 0;
+  }
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+  .image {
+    width: 100%;
+  }
+  h2 {
+    margin: 20px auto;
+    text-align: center;
+    border: 1px solid hotpink;
+    border-radius: 15px;
+    padding: 10px;
+    width: 200px;
+    background-color: hotpink;
+    color: #fff;
+    cursor: pointer;
   }
 </style>

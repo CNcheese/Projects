@@ -1,12 +1,12 @@
 <template>
   <el-row class="app-header">
     <el-col :span="14"> <i class="iconfont icon-heima"></i> <b>江苏传智播客教育科技股份有限公司</b> </el-col>
-    <el-col :span="8" :offset="6">
+    <el-col :span="5" :offset="6">
       <el-dropdown trigger="click">
         <span class="el-dropdown-link">
-          <el-input placeholder="随便看看" clear="see"></el-input>
-          <img width="30" :src="userInfo.photo">
-          {{userInfo.name}}<i class="el-icon-arrow-down el-icon--right"></i>
+          <input placeholder="随便看看" class="see">
+          <img width="30" :src="$store.state.user.photo">
+          {{ $store.state.user.name }}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>账户设置</el-dropdown-item>
@@ -23,11 +23,11 @@ export default {
   name: 'Apphead',
   data () {
     return {
-      userInfo: {}
+      // userInfo: {}
     }
   },
   created () {
-    this.userInfo = JSON.parse(window.localStorage.getItem('user_info'))
+    // this.userInfo = JSON.parse(window.localStorage.getItem('user_info'))
   },
   methods: {
     handleOut () {
@@ -74,5 +74,12 @@ export default {
 
 .el-icon-arrow-down {
   font-size: 12px;
+}
+.see {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 80px;
+  text-align: center;
 }
 </style>
